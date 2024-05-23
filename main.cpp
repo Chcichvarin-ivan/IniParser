@@ -2,7 +2,7 @@
  * @Author: Ivan Chichvarin ichichvarin@humanplus.ru
  * @Date: 2024-05-22 23:43:06
  * @LastEditors: Ivan Chichvarin ichichvarin@humanplus.ru
- * @LastEditTime: 2024-05-23 00:05:00
+ * @LastEditTime: 2024-05-23 22:46:12
  * @FilePath: /IniParser/main.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -22,7 +22,7 @@ int main() {
         "\n"
         "[guests] \n"
         "guest1_name = Ivan Durak\n"
-        "guest2_name =  Vasilisa Premudraya\n"
+        "  guest2_name    =         Vasilisa Premudraya    \n"
         "[guest black list]"};
     ini::Document doc = ini::Load(input);
 

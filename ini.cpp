@@ -2,7 +2,7 @@
  * @Author: Ivan Chichvarin ichichvarin@humanplus.ru
  * @Date: 2024-05-22 23:43:49
  * @LastEditors: Ivan Chichvarin ichichvarin@humanplus.ru
- * @LastEditTime: 2024-05-23 01:18:39
+ * @LastEditTime: 2024-05-23 23:08:24
  * @FilePath: /IniParser/ini.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -32,7 +32,7 @@ std::size_t ini::Document::GetSectionCount() const{
 ini::Document ini::Load(std::istream& input){
     Document ret_doc;
     std::string line;
-    Section* p_current_section;
+    Section* p_current_section = nullptr;
     while(getline(input, line)){
         size_t iterator = line.find_first_not_of(" ");
         if(iterator == std::string::npos){//empty line
@@ -51,10 +51,12 @@ ini::Document ini::Load(std::istream& input){
                     break;
                 }
             }
-            name_ = line.substr(iterator, subst_end);
-            iterator = line.find("=");
+            name_ = line.substr(iterator, subst_end - iterator);
+            iterator = line.find("=") + 1;
 
-            while(line[iterator++]==' ');
+            while(line[iterator]==' '){
+                ++iterator;
+            }
             
             subst_end = line.find_last_not_of(" ");
             value_ = line.substr(iterator, subst_end-iterator + 1);
